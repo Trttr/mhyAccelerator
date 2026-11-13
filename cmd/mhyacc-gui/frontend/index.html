@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>mhyAccelerator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="titlebar">
+    <div class="app-id">
+      <svg class="app-icon" viewBox="0 0 20 20" aria-hidden="true"><path d="M11.2 1.5 3.6 11.2h5.2l-1 7.3 7.6-9.8H10.2z" fill="currentColor"/></svg>
+      <span class="app-name">mhyAccelerator</span>
+      <span class="app-sub" data-i18n="subtitle"></span>
+    </div>
+    <div class="segmented" role="group" aria-label="Language">
+      <button data-lang="zh">中文</button>
+      <button data-lang="en">EN</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <main class="col-main">
+      <!-- Control: status, start/stop, current speed -->
+      <section class="hero">
+        <div class="hero-left">
+          <div id="pill" class="state off"><span class="state-dot"></span><span id="pillText"></span></div>
+          <div id="phase" class="phase"></div>
+          <button id="toggle" class="btn btn-accent"></button>
+          <div id="error" class="error" hidden></div>
+        </div>
+        <div class="hero-right">
+          <div class="speed-label" data-i18n="speed"></div>
+          <div class="speed"><span id="speedNum">0.0</span><span class="speed-unit">MB/s</span></div>
+          <div id="gain" class="gain"></div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="block-title" data-i18n="gamesTitle"></div>
+        <div id="games" class="games" role="group"></div>
+      </section>
+
+      <section class="strip">
+        <div class="strip-item"><span class="strip-label" data-i18n="traffic"></span><span id="traffic" class="strip-value">—</span></div>
+        <div class="strip-item"><span class="strip-label" data-i18n="uptime"></span><span id="uptime" class="strip-value">—</span></div>
+        <div class="strip-item"><span class="strip-label" data-i18n="launcher"></span><span id="launcher" class="strip-value">—</span></div>
+        <div class="strip-item"><span class="strip-label" data-i18n="peak"></span><span id="peak" class="strip-value">—</span></div>
+      </section>
+
+      <section class="block">
+        <div class="block-title" data-i18n="chartTitle"></div>
+        <canvas id="chart" height="132"></canvas>
+      </section>
+
+      <section id="hosts"></section>
+
+      <section class="block maintenance">
+        <div class="block-title" data-i18n="maintTitle"></div>
+        <p class="maint-note" data-i18n="maintNote"></p>
+        <div class="maint-actions">
+          <button id="restoreHosts" class="btn btn-subtle" data-i18n="restoreHosts"></button>
+          <button id="clearData" class="btn btn-subtle" data-i18n="clearData"></button>
+          <span id="maintMsg" class="maint-msg"></span>
+        </div>
+      </section>
+    </main>
+
+    <aside class="col-side">
+      <section class="block log">
+        <div class="block-title" data-i18n="eventsTitle"></div>
+        <ol id="events" class="events"></ol>
+        <button id="newEvents" class="new-events" hidden></button>
+      </section>
+    </aside>
+  </div>
+
+  <footer data-i18n="footer"></footer>
+
+  <!-- Shown when the official launcher is open: it must be closed before takeover. -->
+  <div id="modal" class="modal" hidden>
+    <div class="dialog" role="alertdialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="dialog-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 3 2.5 20h19L12 3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12 9.5v5M12 17.2v.3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </div>
+      <h3 id="modalTitle" data-i18n="modalTitle"></h3>
+      <p data-i18n="modalBody"></p>
+      <ol class="steps">
+        <li data-i18n="step1"></li>
+        <li data-i18n="step2"></li>
+        <li data-i18n="step3"></li>
+      </ol>
+      <div id="modalState" class="modal-state"></div>
+      <div class="dialog-actions">
+        <button id="modalOk" class="btn btn-accent" data-i18n="gotIt"></button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+bin/
+*.exe
+m0-result.json
+logs/
